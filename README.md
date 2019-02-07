@@ -31,7 +31,8 @@ Two power sources - one for grid Pi + one for button Pi
 
 To work a response button into setup the setup and allow for continued disconnection of recorder and stim, we will be using Precision Time Protocol (PCP) 
 
-## Analysis (Challenging myself to have everything within python)
+## Analysis 
+(Challenging myself to have everything within python)
 **Base Video Processing Components** (OpenCV)
 - Trim Start
 - Gaussian Blur
