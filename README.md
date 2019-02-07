@@ -69,9 +69,9 @@ Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi
 
 ### Video Analysis
 - Basic Object Contour Tracking (Motion Detection by Image Difference)
-and
+**and**
 - Basic Geometric classifiers (cv2.PolyApprox) within bounded contours (circles)
-or
+**or**
 - Hough Circle Detection
 
 ### EEG Analysis				
