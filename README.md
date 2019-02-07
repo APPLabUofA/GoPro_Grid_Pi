@@ -44,11 +44,10 @@ Gaussian Blur
 Thresholding 
 
 *Outputs*
--List of [frame + start event trigger] (where the max[index] = corresponds with the last EEG event)
--List of [frame + end event trigger]
--List of [frame + trigger state] (0 B + G channels below thresholds, 1 above B channel threshold, 2 above R channel threshold
-	
-Eventually will output an ~[-1,1] video epoch to be the raw input for deep learning
+- List of [frame + start event trigger] (where the max[index] = corresponds with the last EEG event)
+- List of [frame + end event trigger]
+- List of [frame + trigger state] (0 B + G channels below thresholds, 1 above B channel threshold, 2 above R channel threshold
+	- Eventually will output an ~[-1,1] video epoch to be the raw input for deep learning
 
 **Base EEG Processing Components**
 - Trial Rejections (blink + wrong response, noise)
