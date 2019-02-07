@@ -1,4 +1,4 @@
-# Pi/GoPro study
+# GoPro_Eye_Pi study
 ## Pressing Questions
 VR room lighting characteristics?
 Should we have a condition where the experiment is run on the old system with embedded triggers?
