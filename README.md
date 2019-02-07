@@ -51,9 +51,9 @@ To work a response button into setup the setup and allow for continued disconnec
 *Outputs*
 - ERPs
 
-##Versions
+## Versions
 
-##V1 
+## V1 
 Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro + Pi (+ Button?)
 
 ### Video Analysis
