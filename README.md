@@ -51,9 +51,9 @@ Thresholding
 Eventually will output an ~[-1,1] video epoch to be the raw input for deep learning
 
 **Base EEG Processing Components**
--Trial Rejections (blink + wrong response, noise)
--High/Low filtering
--Compression/Contraction
+- Trial Rejections (blink + wrong response, noise)
+- High/Low filtering
+- Compression/Contraction
 
 *Outputs*
 ERPs
