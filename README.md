@@ -50,47 +50,47 @@ To work a response button into setup the setup and allow for continued disconnec
 *Outputs*
 - ERPs
 
-**Versions**
-**V1** Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro + Pi (+ Button?)
+##**Versions**
+##**V1** Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro + Pi (+ Button?)
 
-Video Analysis
+### Video Analysis
 - Basic Geometric classifiers (cv2.PolyApprox)
 	- Once contour is identified --> constructing into separate channels RGB
 	- using dynamic thresholding of Blue and Green channels ratioed to background lighting (RBG Channeling)
 
-EEG Analysis 
+### EEG Analysis 
 	
 	
-**V2** Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi 
+##**V2** Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi 
 
-Video Analysis
+### Video Analysis
 - Basic Object Contour Tracking (Motion Detection by Image Difference)
 and
 - Basic Geometric classifiers (cv2.PolyApprox) within bounded contours (circles)
 or
 - Hough Circle Detection
 
-EEG Analysis				
+### EEG Analysis				
 
-**V3** Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
+## **V3** Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
 	
-Video Analysis 
+### Video Analysis 
 - Background/Foreground separation
 - Object Tracking
 - Perspective Transformation
 - Occlusion Procedure
 
-EEG Analysis
+### EEG Analysis
 
-**V4** Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
+## **V4** Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
 
-Video Preprocessing
+### Video Preprocessing
 - Optic flow channels
 - Analysis
-Video Analysis
+### Video Analysis
  - Object specific YOLOv3 Classifications
 
-EEG Analysis 
+### EEG Analysis 
 - Deep Learning with multimodal inputs of EEG and video YOLOv3 outputs 
 
 		
