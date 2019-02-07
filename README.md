@@ -10,9 +10,13 @@ Think at this point we may want to have a cheap eye tracking system on hand - fo
 
 **What we will need long-term**
 Eye Tracking - mountable
+
 2 Raspberry Pis (use zero Ws)
+
 2 gopros or some alternative small high FPS/high resolution
+
 button
+
 Infrared emitter & Infrared Depth Camera for scene construction?
 
 Possibility of using the following hardware in lieu of GoPros + Infrared hardware
@@ -72,11 +76,14 @@ V2 Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi
 			EEG Analysis				
 
 V3 Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
+	
 	Video Analysis 
+		
 		Background/Foreground separation
 		Object Tracking
 		Perspective Transformation
 		Occlusion Procedure
+	
 	EEG Analysis
 
 V4 Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
