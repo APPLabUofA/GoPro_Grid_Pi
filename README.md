@@ -64,7 +64,7 @@ Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro 
 ### EEG Analysis 
 	
 	
-##V2 
+## V2 
 Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi 
 
 ### Video Analysis
