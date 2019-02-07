@@ -2,14 +2,15 @@
 ## Pressing Questions
 VR room lighting characteristics?
 Should we have a condition where the experiment is run on the old system with embedded triggers?
-
+Heat Sinks (2-4) GPU/CPU
 
 ## Hardware
 **What we will need short-term**
 - At this point we may want to have a cheap eye tracking system on hand - for the sake of developing a complete product
 
-
 **What we will need long-term**
+- USB to MicroUSB
+- Microusb to AUX (3.5mm)
 - Eye Tracking - mountable
 - 2 Raspberry Pis (use zero Ws)
 - 2 gopros or some alternative small high FPS/high resolution
@@ -28,6 +29,8 @@ Problem of attaching so much hardware to the head? - Need a ergonomic solution, 
 Currently using a - 74AHCT125  level converter chip (allows for safe 3V and 5V connections)
 	- Neopixel python library is now CircuitPython
 Two power sources - one for grid Pi + one for button Pi
+
+Replace the 74AHCT125 IC with a diode?
 
 To work a response button into setup the setup and allow for continued disconnection of recorder and stim, we will be using Precision Time Protocol (PCP) 
 
