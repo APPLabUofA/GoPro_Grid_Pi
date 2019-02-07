@@ -51,8 +51,10 @@ To work a response button into setup the setup and allow for continued disconnec
 *Outputs*
 - ERPs
 
-##**Versions**
-##**V1** Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro + Pi (+ Button?)
+##Versions
+
+##V1 
+Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro + Pi (+ Button?)
 
 ### Video Analysis
 - Basic Geometric classifiers (cv2.PolyApprox)
@@ -62,7 +64,8 @@ To work a response button into setup the setup and allow for continued disconnec
 ### EEG Analysis 
 	
 	
-##**V2** Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi 
+##V2 
+Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi 
 
 ### Video Analysis
 - Basic Object Contour Tracking (Motion Detection by Image Difference)
@@ -73,7 +76,8 @@ or
 
 ### EEG Analysis				
 
-## **V3** Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
+## V3
+Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
 	
 ### Video Analysis 
 - Background/Foreground separation
@@ -83,7 +87,8 @@ or
 
 ### EEG Analysis
 
-## **V4** Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
+## V4
+Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
 
 ### Video Preprocessing
 - Optic flow channels
