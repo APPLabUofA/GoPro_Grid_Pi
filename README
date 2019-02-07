@@ -1,5 +1,5 @@
-Pi/GoPro study
-Hardware
+# Pi/GoPro study
+__Hardware__
 Can I get a prototype box from the shop? 
 Ready to build V1
 Using a - 74AHCT125  level converter chip (allows for safe 3V and 5V connections)
@@ -17,7 +17,7 @@ Trim Start
 Gaussian Blur
 Thresholding 
 
-Outputs
+__Outputs__
 List of [frame + start event trigger] (where the max[index] = corresponds with the last EEG event)
 List of [frame + end event trigger]
 List of [frame + trigger state] (0 B + G channels below thresholds, 1 above B channel threshold, 2 above R channel threshold
