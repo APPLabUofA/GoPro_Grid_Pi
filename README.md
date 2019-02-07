@@ -77,14 +77,13 @@ V2 Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi
 
 V3 Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
 	
-	Video Analysis 
-		
-		Background/Foreground separation
-		Object Tracking
-		Perspective Transformation
-		Occlusion Procedure
-	
-	EEG Analysis
+Video Analysis 
+	Background/Foreground separation
+	Object Tracking
+	Perspective Transformation
+	Occlusion Procedure
+
+EEG Analysis
 
 V4 Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
 	Video Analysis
