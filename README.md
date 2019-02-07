@@ -25,30 +25,40 @@ Problem of attaching so much hardware to the head? - Need a ergonomic solution, 
 	 
 ## Builds
 - [ ] **V1.0** (as of Feb. 11th)
-- Currently using a - 74AHCT125  level converter chip (allows for safe 3V and 5V connections)
+Currently using a - 74AHCT125  level converter chip (allows for safe 3V and 5V connections)
 	- Neopixel python library is now CircuitPython
-- Will need two power sources - one for grid Pi + one for button Pi
-- To work a response button into setup the setup and allow for continued disconnection of recorder and stim, we will be using Precision Time Protocol (PCP) 
+Two power sources - one for grid Pi + one for button Pi
+
+To work a response button into setup the setup and allow for continued disconnection of recorder and stim, we will be using Precision Time Protocol (PCP) 
 
 ## Analysis (Challenging myself to have everything within python)
 **Base Video Processing Components** (OpenCV)
-- Trim Start
-- Gaussian Blur
-- Thresholding 
+Trim Start
+
+Gaussian Blur
+
+Thresholding 
 
 *Outputs*
-- List of [frame + start event trigger] (where the max[index] = corresponds with the last EEG event)
-- List of [frame + end event trigger]
-- List of [frame + trigger state] (0 B + G channels below thresholds, 1 above B channel threshold, 2 above R channel threshold
+
+List of [frame + start event trigger] (where the max[index] = corresponds with the last EEG event)
+
+List of [frame + end event trigger]
+
+List of [frame + trigger state] (0 B + G channels below thresholds, 1 above B channel threshold, 2 above R channel threshold
 	- Eventually will output an ~[-1,1] video epoch to be the raw input for deep learning
 
 **Base EEG Processing Components**
-- Trial Rejections (blink + wrong response, noise)
-- High/Low filtering
-- Compression/Contraction
+
+Trial Rejections (blink + wrong response, noise)
+
+High/Low filtering
+
+Compression/Contraction
 
 *Outputs*
-- ERPs
+
+ERPs
 
 **Versions**
 **V1** Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro + Pi (+ Button?)
@@ -56,38 +66,38 @@ Problem of attaching so much hardware to the head? - Need a ergonomic solution, 
 Video Analysis
 - Basic Geometric classifiers (cv2.PolyApprox)
 	- Once contour is identified --> constructing into separate channels RGB
-	 - using dynamic thresholding of Blue and Green channels ratioed to background lighting (RBG Channeling)
+	- using dynamic thresholding of Blue and Green channels ratioed to background lighting (RBG Channeling)
 	EEG Analysis 
 	
 	
 **V2** Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi 
 
 Video Analysis
-- Basic Object Contour Tracking (Motion Detection by Image Difference)
-
-- Basic Geometric classifiers (cv2.PolyApprox) within bounded contours (circles)
-or
-- Hough Circle Detection
+	- Basic Object Contour Tracking (Motion Detection by Image Difference)
+	and
+	- Basic Geometric classifiers (cv2.PolyApprox) within bounded contours (circles)
+	or
+	- Hough Circle Detection
 
 EEG Analysis				
 
 **V3** Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
 	
 Video Analysis 
-- Background/Foreground separation
-- Object Tracking
-- Perspective Transformation
-- Occlusion Procedure
+	- Background/Foreground separation
+	- Object Tracking
+	- Perspective Transformation
+	- Occlusion Procedure
 
 EEG Analysis
 
 **V4** Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
 
 Video Preprocessing
-- Optic flow channels
-- Analysis
+	- Optic flow channels
+	- Analysis
 Video Analysis
- - Object specific YOLOv3 Classifications
+ 	- Object specific YOLOv3 Classifications
 
 EEG Analysis 
 - Deep Learning with multimodal inputs of EEG and video YOLOv3 outputs 
