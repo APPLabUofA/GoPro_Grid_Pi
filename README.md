@@ -1,12 +1,14 @@
 # GoPro_Eye_Pi study
 ## Pressing Questions
 VR room lighting characteristics?
+
 Should we have a condition where the experiment is run on the old system with embedded triggers?
-Heat Sinks (2-4) GPU/CPU
+
 
 ## Hardware
 **What we will need short-term**
 - At this point we may want to have a cheap eye tracking system on hand - for the sake of developing a complete product
+- Heat Sinks for Pi(s) (2-4) GPU/CPU
 
 **What we will need long-term**
 - USB to MicroUSB
