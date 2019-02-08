@@ -116,3 +116,13 @@ Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (
 
 ## Stills
 Working in my spare time the next steps of YOLO opencv integration for classification + object tracking
+
+## VLC Pre-Preprocessing
+(Can interface with ffmpeg)
+View>Advanced Controls
+Add Interface>Terminal
+
+Create a video version with embedded frame number
+
+C:\\Users\\User\\ffmpeg-4.1-win64-static\\bin\\ffmpeg.exe -i ..\003_camera_p3.MP4 -vf "drawtext=fontfile=Arial.ttf: text='%{frame_num}': start_number=1: x=(w-tw)/2: y=h-(2*lh): fontcolor=black: fontsize=20: box=1: boxcolor=white: boxborderw=5" -c:a copy ..\003_camera_p3_imbedded.MP4
+
