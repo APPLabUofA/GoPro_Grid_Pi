@@ -13,7 +13,10 @@ Should we have a condition where the experiment is run on the old system with em
 **What we will need long-term**
 - USB to MicroUSB
 - Microusb to AUX (3.5mm)
-- Eye Tracking - mountable
+- Eye Tracking - mountable - can possibly construct our own from COMS/MPGA
+	- https://www.tobiipro.com/product-listing/nano/
+	- https://www.tobiipro.com/product-listing/tobii-pro-glasses-2/
+	
 - 2 Raspberry Pis (use zero Ws)
 - 2 gopros or some alternative small high FPS/high resolution
 - button
