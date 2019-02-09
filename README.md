@@ -33,7 +33,8 @@ Problem of attaching so much hardware to the head? - Need a ergonomic solution, 
 - [ ] **V1.0** (as of Feb. 11th)
 Currently using a - 74AHCT125  level converter chip (allows for safe 3V and 5V connections)
 	- Neopixel python library is now CircuitPython
-Two power sources - one for grid Pi + one for button Pi
+Two power sources - one for grid Pi (triggers from other Pi into EEG stream) + one for button Pi (sync. feeds to other Pi)
+
 
 Replace the 74AHCT125 IC with a diode?
 
