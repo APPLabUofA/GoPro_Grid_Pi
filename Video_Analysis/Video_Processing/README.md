@@ -1,9 +1,9 @@
 # General OpenCV notes
 
-For reference, the first argument in the cap.set() command refers to the enumeration of the camera properties, listed below:
+The first argument in the cap.set() command refers to the enumeration of the camera properties, listed below:
 
 0. CV_CAP_PROP_POS_MSEC Current position of the video file in milliseconds.
-1. CV_CAP_PROP_POS_FRAMES 0-based index of the frame to be decoded/captured next.
+1. CV_CAP_PROP_POS_FRAMES 0-based index of the frame to be decoded/captured next. (for x frame, input x-1 for 2nd arguement)
 2. CV_CAP_PROP_POS_AVI_RATIO Relative position of the video file
 3. CV_CAP_PROP_FRAME_WIDTH Width of the frames in the video stream.
 4. CV_CAP_PROP_FRAME_HEIGHT Height of the frames in the video stream.
