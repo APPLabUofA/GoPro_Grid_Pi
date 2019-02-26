@@ -14,9 +14,6 @@ Should we have a condition where the experiment is run on the old system with em
 - USB to MicroUSB
 - Microusb to AUX (3.5mm)
 - Eye Tracking - mountable - can possibly construct our own from COMS/MPGA
-	- https://www.tobiipro.com/product-listing/nano/
-	- https://www.tobiipro.com/product-listing/tobii-pro-glasses-2/
-	
 - 2 Raspberry Pis (use zero Ws)
 - 2 gopros or some alternative small high FPS/high resolution
 - button
@@ -129,4 +126,11 @@ ffmpeg must be installed -
 inputs - ffmpeg.exe location (or set Environmental varaible PATH) & video location
 outputs - save location
 C:\\Users\\User\\ffmpeg-4.1-win64-static\\bin\\ffmpeg.exe -i ..\003_camera_p3.MP4 -vf "drawtext=fontfile=Arial.ttf: text='%{frame_num}': start_number=1: x=(w-tw)/2: y=h-(2*lh): fontcolor=black: fontsize=20: box=1: boxcolor=white: boxborderw=5" -c:a copy ..\003_camera_p3_imbedded.MP4
+
+
+
+
+
+
+
 
