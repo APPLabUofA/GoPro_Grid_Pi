@@ -27,110 +27,103 @@ Problem of attaching so much hardware to the head? - Need a ergonomic solution, 
 	for reproducibility we should have rig be constructed and stay the same (i.e. distance between GoPros (or other cameras) + eye 		tracking
 	 
 ## Builds
-- [ ] **V1.0** (as of Feb. 11th)
-Currently using a - 74AHCT125  level converter chip (allows for safe 3V and 5V connections)
-	- Neopixel python library is now CircuitPython
-Two power sources - one for grid Pi (triggers from other Pi into EEG stream) + one for button Pi (sync. feeds to other Pi)
+
+Visor & Grid Projects
+
+Grid 
+biking outside - remote, controlled stim (lights), no eye tracking needed because this is focused around the visual P3 task
+
+End Results
+(2) Pi3(s) [two-way communication]
+(1) Iphone [can hold a charge while providing a local WAP HUB for several hours]
+EEG Cap [active]
+Vamp
+Button for response
 
 
-Replace the 74AHCT125 IC with a diode?
+## Prototype 1
+### 1 Pi - lots of cords 
+[Pi 3 B+, both on the way]
 
-To work a response button into setup the setup and allow for continued disconnection of recorder and stim, we will be using Precision Time Protocol (PCP) 
+### Prototype 2
+2 Pi - wired
+
+### Prototype 3 
+Pis talking through ethernet
+
+### Prototype 4
+Pis talking through WAP HUB (Iphone?)
+Static Pi IP
+
+### Prototype 5 
+Behavioural Monitoring (Button)
+
+Pi1 turns on pin of Pi2 to indicate target or standard
+Pi2 only responds to button press if state is on (target) - works as long as jitter maxes within reasonable time - can’t not have responses recorded past ~ 50 ms
+
+### Prototype 6
+Add GoPro + everything together
+
+Triggering - for each event Pi1 pings Pi2 immediately before LED and again immediately after trigger sent. Account for variability in distance
+
+Experimental Procedure
+Syncing Recordings
+Start EEG 
+Start GoPro
+Start Experiment (Turn grid all red & send trigger to amp via Pi1 to Pi2 link (with Pings))
+Experiment is a simple visual oddball of green standards and blue targets (press button)
+End Experiment (in the same fashion)
+
 
 ## Analysis 
-(Challenging myself to have everything within python)
+
 **Base Video Processing Components** (OpenCV)
 - Trim Start
 - Gaussian Blur
 - Thresholding 
+- Compression/Contraction
 *Outputs*
 - List of [frame + start event trigger] (where the max[index] = corresponds with the last EEG event)
 - List of [frame + end event trigger]
 - List of [frame + trigger state] (0 B + G channels below thresholds, 1 above B channel threshold, 2 above R channel threshold
 	- Eventually will output an ~[-1,1] video epoch to be the raw input for deep learning
-
-**Base EEG Processing Components**
-- Trial Rejections (blink + wrong response, noise)
-- High/Low filtering
-- Compression/Contraction
-
-*Outputs*
-- ERPs
-
-## Versions
-
-## V1 
-Stationary Viewer + Stationary Light Grid (0, 0) (whole grid dimly lit) - GoPro + Pi (+ Button?)
-
-### Video Analysis
+V1
 - Basic Geometric classifiers (cv2.PolyApprox)
 	- Once contour is identified --> constructing into separate channels RGB
 	- using dynamic thresholding of Blue and Green channels ratioed to background lighting (RBG Channeling)
-
-### EEG Analysis 
-	
-	
-## V2 
-Stationary Viewer + Moving grid  (0, xy) (one bright light) - GoPro + Pi 
-
-### Video Analysis
+V2
 - Basic Object Contour Tracking (Motion Detection by Image Difference)
 **and**
 - Basic Geometric classifiers (cv2.PolyApprox) within bounded contours (circles)
 **or**
 - Hough Circle Detection
 
-### EEG Analysis				
-
-## V3
-Stationary Viewer + Moving grid (0, xz+rot.)  - GoPro + Pi (+Eye Tracking? + Button?)
-	
-### Video Analysis 
+V3
 - Background/Foreground separation
 - Object Tracking
 - Perspective Transformation
 - Occlusion Procedure
-
-### EEG Analysis
-
-## V4
-Moving Perspective + Moving Grid (xz+rot. + xz+rot.) GoPro + Pi + Eye Tracking (+ Button?)
-
-### Video Preprocessing
-- Optic flow channels
-- Analysis
-### Video Analysis
+v4
  - Object specific YOLOv3 Classifications
 
-### EEG Analysis 
-- Deep Learning with multimodal inputs of EEG and video YOLOv3 outputs 
+**Combining EEG and Video Components**
+- Deep Learning with multimodal inputs of EEG and video YOLOv3 outputs
 
-		
 ## Software
+Python
+- opencv
 
+VLC
 
-## Analysis
-80% switched over to python already, some trouble experienced with uploading the default MP4 file format - been using avi. - looking into RAW file conversion via mmfpeg-python 
-
-## Stills
-Working in my spare time the next steps of YOLO opencv integration for classification + object tracking
-
+FFMPEG
+	
 ## VLC Pre-Preprocessing
 (Can interface with ffmpeg)
 View>Advanced Controls
 Add Interface>Terminal
 
-Create a video version with embedded frame number
-
+## Create a video version with embedded frame number
 ffmpeg must be installed - 
 inputs - ffmpeg.exe location (or set Environmental varaible PATH) & video location
 outputs - save location
 C:\\Users\\User\\ffmpeg-4.1-win64-static\\bin\\ffmpeg.exe -i ..\003_camera_p3.MP4 -vf "drawtext=fontfile=Arial.ttf: text='%{frame_num}': start_number=1: x=(w-tw)/2: y=h-(2*lh): fontcolor=black: fontsize=20: box=1: boxcolor=white: boxborderw=5" -c:a copy ..\003_camera_p3_imbedded.MP4
-
-
-
-
-
-
-
-
