@@ -28,8 +28,6 @@ Problem of attaching so much hardware to the head? - Need a ergonomic solution, 
 	 
 ## Builds
 
-Visor & Grid Projects
-
 Grid 
 biking outside - remote, controlled stim (lights), no eye tracking needed because this is focused around the visual P3 task
 
