@@ -85,10 +85,12 @@ End Experiment (in the same fashion)
 - List of [frame + end event trigger]
 - List of [frame + trigger state] (0 B + G channels below thresholds, 1 above B channel threshold, 2 above R channel threshold
 	- Eventually will output an ~[-1,1] video epoch to be the raw input for deep learning
+	
 V1
 - Basic Geometric classifiers (cv2.PolyApprox)
 	- Once contour is identified --> constructing into separate channels RGB
 	- using dynamic thresholding of Blue and Green channels ratioed to background lighting (RBG Channeling)
+	
 V2
 - Basic Object Contour Tracking (Motion Detection by Image Difference)
 **and**
