@@ -1,34 +1,6 @@
 # GoPro_Grid_Pi
-## Pressing Questions
-VR room lighting characteristics?
 
-Should we have a condition where the experiment is run on the old system with embedded triggers?
-
-
-## Hardware
-**What we will need short-term**
-- At this point we may want to have a cheap eye tracking system on hand - for the sake of developing a complete product
-- Heat Sinks for Pi(s) (2-4) GPU/CPU
-
-**What we will need long-term**
-- USB to MicroUSB
-- Microusb to AUX (3.5mm)
-- Eye Tracking - mountable - can possibly construct our own from COMS/MPGA
-- 2 Raspberry Pis (use zero Ws)
-- 2 gopros or some alternative small high FPS/high resolution
-- button
-- Infrared emitter & Infrared Depth Camera for scene construction?
-
-Possibility of using the following hardware in lieu of GoPros + Infrared hardware
-	Intel realsense camera - 2 RBG cameras + fisheye camera + infrared projector and infrared camera
-		Works on Windows as long as you have USB 3.0 (surface)
-
-Problem of attaching so much hardware to the head? - Need a ergonomic solution, cushioned helmet to mount instruments on top of EEG? 
-	for reproducibility we should have rig be constructed and stay the same (i.e. distance between GoPros (or other cameras) + eye 		tracking
-	 
-## Builds
-
-Grid 
+End Goal
 biking outside - remote, controlled stim (lights), no eye tracking needed because this is focused around the visual P3 task
 
 End Results
