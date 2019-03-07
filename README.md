@@ -1,4 +1,4 @@
-# GoPro_Eye_Pi study
+# GoPro_Grid_Pi
 ## Pressing Questions
 VR room lighting characteristics?
 
