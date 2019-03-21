@@ -1,42 +1,45 @@
-# GoPro_Grid_Pi
+﻿# GoPro_Grid_Pi
 
 End Goal
 biking outside - remote, controlled stim (lights), no eye tracking needed because this is focused around the visual P3 task
 
 End Results
-(2) Pi3(s) [two-way communication]
-(1) Iphone [can hold a charge while providing a local WAP HUB for several hours]
-EEG Cap [active]
-Vamp
-Button for response
+- (2) Pi3(s) [two-way communication]
+- (1) Iphone [can hold a charge while providing a local WAP HUB for several hours]
+- EEG Cap [active]
+- Vamp
+- Button for response with state monitoring
 
+## Experiment 1
+ 1 Pi - lots of cords 
 
-## Prototype 1
-### 1 Pi - lots of cords 
 [Pi 3 B+, both on the way]
 
-### Prototype 2
+### Experiment 2
 2 Pi - wired
 
-### Prototype 3 
+### Experiment 3 
 Pis talking through ethernet
 
-### Prototype 4
+### Experiment 4
 Pis talking through WAP HUB (Iphone?)
+
+no-button
+
 Static Pi IP
 
-### Prototype 5 
-Behavioural Monitoring (Button)
+### Experiment 5 
+WAP w/ button + state monitoring/updates
 
-Pi1 turns on pin of Pi2 to indicate target or standard
-Pi2 only responds to button press if state is on (target) - works as long as jitter maxes within reasonable time - can’t not have responses recorded past ~ 50 ms
+- Pi1 turns on pin of Pi2 to indicate target or standard
+- Pi2 only responds to button press if state is on (target) - works as long as jitter maxes within reasonable time - can’t not have responses recorded past ~ 50 ms
 
 ### Prototype 6
 Add GoPro + everything together
 
 Triggering - for each event Pi1 pings Pi2 immediately before LED and again immediately after trigger sent. Account for variability in distance
 
-Experimental Procedure
+## Experimental Procedure
 Syncing Recordings
 Start EEG 
 Start GoPro
@@ -89,7 +92,7 @@ VLC
 
 FFMPEG
 	
-## VLC Pre-Preprocessing
+## VLC Pre-Preprocessing for finding the start_eeg & approx. trial_start from frame by frame video
 (Can interface with ffmpeg)
 View>Advanced Controls
 Add Interface>Terminal
