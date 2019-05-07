@@ -4,15 +4,18 @@ from gpiozero import LED
 from gpiozero.pins.pigpio import PiGPIOFactory
 import time
 from time import sleep
+import numpy as np
 
 partnum = input("partnum: ")
-factory = PiGPIOFactory(host='192.168.4.5') # host='129.128.174.163'
+factory = PiGPIOFactory(host='192.168.4.2') # host='129.128.174.163'
 led = LED(17,pin_factory=factory)
-local_pi_trigs = []
+length = 200
+local_pi_trigs = np.zeros((length))
 start_time = time.time()
 
-for i in range(100):
-    local_pi_trigs.append(start_time - time.time())
+for i in range(length):
+    local_pi_trigs[i] = time.time() - start_time 
+    print(time.time() - start_time)
     led.on()
     sleep(1)
     led.off()
