@@ -21,6 +21,7 @@ led_2 = LED(17, pin_factory=local_factory) ) # local pins
 #gpiozero.OutputDevice
 #gpiozero.PWMOutputDevice
 #This library uses Broadcom (BCM) pin numbering for the GPIO pins
+#https://github.com/RPi-Distro/python-gpiozero/pull/631
 
 while True:
     led_1.on()
