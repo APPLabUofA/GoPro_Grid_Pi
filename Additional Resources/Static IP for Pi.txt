@@ -1,6 +1,6 @@
 Static IP for the Pi
 
-sudo/nano/etc/dhcpcd.conf
+sudo nano etc/dhcpcd.conf
 # uncomment the following lines
 # interface wlan0 # might be different interface - change it if needed
 #static ip_address= 192.168.43.213/24
