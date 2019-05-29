@@ -12,7 +12,7 @@ trials = 200;
 #blocks = 1;
 
 # # The only thing you need to change is going to be par (participant number) the rest will be dictated by dictionaries
-par = "001"
+par = "003"
 
 
 # %% We will now load in the EEG data 
@@ -41,7 +41,7 @@ df1 = df1.drop(columns='index')
 # %% Here we extract thhe Pi times (imported as df2)
 #df2 = pd.read_csv((r'C:\Users\User\Documents\GitHub\GoPro_Visor_Pi\Pi3_Amp_Latencies\Pi_Time_Data\014_visual_p3_gopro_visor.csv'), sep=',', header=None) # pre-pilot
 #df2 = pd.read_csv((r'C:\Users\User\Documents\GitHub\GoPro_Visor_Pi\Pilot_Data\Experiment_1\Pi_Times\002_visual_p3_gopro_visor.csv'), sep=',', header=None) # pilot
-df2 = pd.read_csv((r'M:\Data\GoPro_Grid\Pi_Times\001_test.csv'), sep=',', header=None) # pilot
+df2 = pd.read_csv((r'M:\Data\GoPro_Grid\Pi_Times\\' + str(par) + '_test.csv'), sep=',', header=None) # pilot
 #df2 = df2.T # transpose for plotting purposes
 df2.columns = ['pi_onset_latency'] # name the coloumns
 df2 = df2.apply(pd.to_numeric, args=('coerce',))  ## Convert to numeric
@@ -73,10 +73,11 @@ plt.close('all')
 # matlibplot 
 plt.figure(0)
 plt.plot(df3['pi_onset_latency'], df3['level_0'], 'k--', label='Pi Times')
-plt.plot(df3['eeg_times'], df3['level_0'], 'ko', label='EEG Times')
+plt.plot(df3['eeg_times'], df3['level_0'], '-.', label='EEG Times')
 plt.xlabel('Latency (Miliseconds)')
-# plt.ylabel('Trial Count')
-legend = plt.legend(loc='upper center', shadow=True, fontsize='x-large')
+plt.ylabel('Trial Number')
+plt.title('Trial Number vs Pi & EEG')
+legend = plt.legend(loc='upper center', shadow=True, fontsize='large')
 legend.get_frame().set_facecolor('C0')
 plt.show()
 
@@ -85,6 +86,8 @@ plt.figure(1)
 plt.plot(df3['Difference'], df3['level_0'], label='EEG - Pi')
 legend = plt.legend(loc='upper right', shadow=True, fontsize='x-large')
 plt.xlabel('Latency (Miliseconds)')
+plt.ylabel('Trial Number')
+plt.title('Trial Number vs Time Difference')
 # plt.ylabel('Trial Count')
 plt.show()
 
@@ -100,8 +103,8 @@ reg =  LinearRegression().fit(df4[:,1].reshape(-1,1), df4[:,5].reshape(-1,1))
 reg.score(df4[:,1].reshape(-1,1), df4[:,5].reshape(-1,1))
 
 df4[:,6] = reg.intercept_ + df4[:,1]*reg.coef_
-df4[:,7] = df4[:,1]-df4[:,5]
-df4[:,8] = df4[:,5]-df4[:,6]
+df4[:,7] = df4[:,5]-df4[:,6]
+# 1:eeg_times, 2:eeg_trig, 3:index, 4:pi times, 5:difference, 6:transformed difference, 7:difference between original difference and transformed difference
 # %% ## Transformed Difference plot
 plt.figure(2)
 plt.plot(df4[:,6], df4[:,0])
@@ -109,8 +112,12 @@ plt.plot(df4[:,6], df4[:,0])
 #plt.plot(df3['Difference'], df3['level_0'], label='EEG - Pi') # plot untransformed
 plt.legend('EEG - Pi', ncol=2, loc='upper left'); #  scalex=True, scaley=True if not using a custom xticks arguement
 plt.xlabel('Latency (miliseconds)')
+plt.ylabel('Trial Number')
+plt.title('Trial Number vs Transformed Difference')
 #plt.xlim([-0.001, 0, 0.001])
 plt.show()
+
+
 
 
 
