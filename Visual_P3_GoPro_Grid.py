@@ -101,6 +101,11 @@ class experiment:
         self.LED_state(pi2trig(255),0)
         time.sleep(self.trig_gap)
 
+    def get_resp_led_off(led_on_time,trig): # get response (if occured in first 1 second) + turn off the LEDs regardless
+        start_resp = time.time()
+        #waits a certain amount of time for button press
+        self.button.wait_for_press(timeout = int(led_on_time * 1000))
+        button_down = time.time() - start_resp # this is response time from the start of the 1 second response window
 
     def get_resp_led_off(led_on_time,trig): # get response (if occured in first 1 second) + turn off the LEDs regardless
         start_resp = time.time()

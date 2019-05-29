@@ -6,6 +6,8 @@ import time
 from time import sleep
 import numpy as np
 
+# to run "GPIOZERO_PIN_FACTORY=pigpio python3 Remote_Pin_Control.py"
+
 partnum = input("partnum: ")
 factory = PiGPIOFactory(host='192.168.4.2') # host='129.128.174.163'
 led = LED(17,pin_factory=factory)
@@ -23,7 +25,7 @@ for i in range(length):
 
 ###save trial information###
 filename = "test"
-filename_part = ("/home/pi/Documents/GoPro_Grid_Pi/data/test/" + partnum + "_" + filename + ".csv")
+filename_part = ("/home/pi/Documents/GitHub/GoPro_Grid_Pi/Pi3_Amp_Latencies/Pi_Times/" + partnum + "_" + filename + ".csv")
 
 
 np.savetxt(filename_part, (local_pi_trigs), delimiter=',',fmt="%s")
