@@ -18,15 +18,17 @@ def ping_response(host):
 partnum = input("partnum: ")
 factory = PiGPIOFactory(host='192.168.4.2') # host='129.128.174.163'
 led = LED(17,pin_factory=factory)
-length = 200
+length = 3
 local_pi_trigs = np.zeros((length))
-ping_pi_trigs = np.zeros((length))
+ping_pi_trigs = np.empty([length], dtype="S100")
 
 start_time = time.time()
 
 for i in range(length):
     local_pi_trigs[i] = time.time() - start_time
-    ping_pi_trigs[i] = ping_response('192.168.4.2')
+    temp = str(ping_response('192.168.4.2'))
+    occur = temp.find(' = ', 260,-1)
+    ping_pi_trigs[i] = temp[occur+3:-1]
     print(time.time() - start_time)
     led.on()
     sleep(1)
