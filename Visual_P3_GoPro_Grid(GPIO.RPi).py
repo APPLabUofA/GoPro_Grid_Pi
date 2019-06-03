@@ -1,34 +1,35 @@
-#tasks use pwmled instead of led
-#make sure button is using SPI pin to send information to the server
-
-
-
 #importing modules
 import board
+import neopixel
+import RPI.GPIO as GPIO
 import time
 from random import randint, shuffle
 import numpy as np
 from gpiozero.pins.pigpio import PiGPIOPin
-from gpiozero.pins.pigpio import PiGPIOFactory
-from neopixel import *
-from gpiozero import MCP2008, PWMLED
+#from gpiozero.pins.pigpio import PiGPIOFactory
 
 class experiment:
     def __init__(self, partnum, trial_num):
         # I approach pin organization by setting the remote pins to be native of the local machine and redefining the lcoal pins under a different 'factory'
-        local_factory = PiGPIOFactory(host='192.168.1.3') # Server Pi - needs to be specified - since most is happening with the other Pi's pins
+        #local_factory = PiGPIOFactory(host='192.168.1.3') # Server Pi - needs to be specified - since most is happening with the other Pi's pins
         #remote_factory = PiGPIOFactory(host='192.168.1.4') # Client Pi - don't specify here as long as you run the script, preceded by the following environmental variables: GPIOZERO_PIN_FACTORY=pigpio PIGPIO_ADDR=192.168.1.3
 
         ##pins we will be using ##
         self.trig_pins = [4,17,27,22,5,6,13,19]
 
-        #button connected to sever pi (should allow the lights to wait for button trigger on server pi)
-        self.button = Button(PiGPIOPIn(19)
-        self.led = PWMLED(17, pin_factory = local_factory)  #using thet MOSI pin (master out slave in) alows the client pi to send information to the server pi
+        '''
+        ##dicitonaries for pins and LEDs##
+        self.pin_dict = {}
+        self.led_dict = {}
+        for num in self.trig_pins:
+            #pins and led triggers connected to them in the client pi
+            self.pin_dict[num] = PiGPIOPin(num)
+            self.led_dict[num] = LED(self.pin_dict[num])
+        '''
 
-        #controls Pi's SPI pins
-        pot = MCP3008(0)
-        self.led.source = pot
+        #button connected to sever pi (should allow the lights to wait for button trigger on server pi)
+        self.button = Button(PiGPIOPIn(17, host = '192.168.1.3'))
+
         ##setup some constant variables##
         self.partnum = partnum
         self.filename = 'visual_p3_gopro_visor'
@@ -55,6 +56,13 @@ class experiment:
         ##number of pixels we will be controlling##
         self.pin_num = 6
 
+        ###initialise GPIO pins###
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(trig_pins,GPIO.OUT)
+
+        ###set triggers to 0###
+        GPIO.output(trig_pins,0)
+
         ##specify which pin we will be controlling the LEDs with##
         pin_out = board.D18
 
@@ -64,24 +72,55 @@ class experiment:
         ##setup our neopixels##
         self.pixels = neopixel.NeoPixel(self.pin_out, self.pin_num, brightness = self.brightness, auto_write = True)
 
+    '''
+    #registers an output given a list of pin numbers and either turns them off(0) or on(1)
+    def LED_state(self, trig_pins, state):
+        for pin in trig_pins:
+            if state == 1:
+                LED_dict[pin].on()
+            if state == 0:
+                LED_dict[pin].off()
+
+    '''
+
+    def pi2trig(self, trig_num):
+        pi_pins = self.trig_pins
+
+        #converts string representation of binary into readable list
+        bin_num = list(reversed(bin(trig_num)[2:]))
+
+        #extends the length of the binary number to match len of pi_pins while maintaining its value
+        while len(bin_num) < len(pi_pins):
+            bin_num.insert(len(bin_num)+1,str(0))
+
+        new_pins = []
+
+        #pins in the same position of the '1's in the binary are appended to the new_pins list
+        for i_trig in range(len(pi_pins)):
+            if bin_num[i_trig] == '1':
+                new_pins.append(pi_pins)
+
+        return new_pins
+
+
 
     def resp_trig(self, trig): # maps response trigger to standard (3) or target (4)
-        if trig == 0.5:
-            resp_trig = 0.3
         if trig == 1:
-            resp_trig = 0.4
-        self.led.value = resp_trig
+            resp_trig = 3
+        else:
+            resp_trig = 4
+        #self.LED_state(pi2trig(resp_trig),1)
+        GPIO.output(pi2trig(resp_trig),1)
         time.sleep(self.trig_gap)
-        self.led.value = 0
+        #self.LED_state(pi2trig(255),0)
+        GPIO.output(pi2trig(255),0)
         time.sleep(self.trig_gap)
-
 
     def get_resp_led_off(led_on_time,trig): # get response (if occured in first 1 second) + turn off the LEDs regardless
         start_resp = time.time()
         #waits a certain amount of time for button press
         self.button.wait_for_press(timeout = int(led_on_time * 1000))
         button_down = time.time() - start_resp # this is response time from the start of the 1 second response window
-
 
     def get_resp_led_off(led_on_time,trig): # get response (if occured in first 1 second) + turn off the LEDs regardless
         start_resp = time.time()
@@ -101,14 +140,17 @@ class experiment:
         self.pixels.fill(self.blank)
         # after_second_light = time.time() - start_resp
         if trig == 1: ## Maps out offset trigger to standard and target flashes
-            self.led.value = 0.5
+            #self.LED_state(pi2trig(5),1)
+            GPIO.output(pi2trig(5),1)
         else:
-            self.led.value = 0.6
+            #self.LED_state(pi2trig(6),1)
+            GPIO.output(pi2trig(6),1)
         time.sleep(self.trig_gap)
-        self.led.value = 0
+        #self.LED_state(pi2trig(255),0)
+        GPIO.output(pi2trig(255),0)
+
 
         return resp_time # before_second_light, after_second_light
-
 
     def get_resp(self, wait_time, prev_delay, resp, trig): # get response (if not in the first second) + wait for wait time (delay)
         start_resp = time.time()
@@ -151,7 +193,6 @@ class experiment:
             b = int(255 - pos*3)
         return (r, g, b)
 
-
     def rainbow_cycle(self, wait, rainbow_time):
         start = time.time()
         while time.time() - start < rainbow_time:
@@ -171,7 +212,7 @@ class experiment:
         resp_latency.append(0)
         time.sleep(2) ## leave red on for 2 seconds
         self.pixels.fill(self.blank)
-        self.led.value = 0
+        self.LED_state(pi2trig(255),0)
 
 
     def run_blocks(self,block_num):
@@ -192,7 +233,8 @@ class experiment:
             #waits for button input to start block
             self.button.wait_for_press()
             self.pixels.fill(self.red)
-            self.led.value = 0.10
+            #self.LED_state(pi2trig(10),1)
+            GPIO.output(pi2trig(10),1)
 
             if block == 0:
                 start_exp = time.time()
@@ -205,7 +247,8 @@ class experiment:
 
             ##end of block##
             self.pixels.fill(self.red)
-            self.led.value = 0.11 # send unique trigger for the end of a block
+            #self.LED_state(pi2trig(11),1) # send unique trigger for the end of a block
+            GPIO.output(pi2trig(11),1)
             trial_dict[trig_time].append(time.time() - start_exp)
             trial_dict[block_start_stop].append(time.time() - start_exp) # end of each block from start_exp
             refresh_trig_visor(4)
@@ -213,7 +256,6 @@ class experiment:
             index += 1
 
         return trial_dict
-
 
     def run_trials(self,trials,trial_dict):
 
@@ -224,26 +266,29 @@ class experiment:
 
             ##determine the type of stimuli we will show on this trial##
             if trials[i_trial] == 0: #standards
-                trig = 0.5
+                trig = 1
                 self.pixels.fill(self.green)
 
             elif trials[i_trial] == 1: #targets
-                trig = 1.0
+                trig = 2
                 self.pixels.fill(self.blue)
 
-            ## Specify which trigger to send Standard vs Target
-            self.led.value = trig
+            ## Specify which trigger to send Standard vs Target # [4,17]
+            #self.LED_state(pi2trig(trig),1)
+            GPIO.output(pi2trig(trig),1)
             trial_dict[trig_type].append(trig)
             trial_dict[trig_time].append(time.time() - start_exp)
             time.sleep(self.trig_gap)
 
-            self.led.value = 0
+            #self.LED_state(pi2trig(255),0)
+            GPIO.output(pi2trig(255),0)
             resp_time = get_resp_led_off(1.0,trig) # before_second_light, after_second_light
             resp_time = get_resp(delay, 1.0, resp_time,trig)
             trial_dict[resp_latency].append(time.time() - start_exp)
             trial_dict[trial_resp].append(resp_time)
 
-            self.led.value = 0 ## doesn't give us a trigger
+            #self.LED_state(pi2trig(255),0) ## doesn't give us a trigger
+            GPIO.output(pi2trig(255),0)
             time.sleep(self.trig_gap)
             end_trial = time.time()
 
@@ -268,8 +313,4 @@ def main():
     exp = experiment(partnum, trial_num)
     trial_dict = exp.run_blocks(block_num)
     exp.end(trial_dict)
-
-    return
-
-if __name__ == "__main__":
-    main()
+main()
