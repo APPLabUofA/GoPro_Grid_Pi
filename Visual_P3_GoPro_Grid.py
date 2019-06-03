@@ -5,7 +5,7 @@ from random import randint, shuffle
 import numpy as np
 from gpiozero.pins.pigpio import PiGPIOPin
 #from gpiozero.pins.pigpio import PiGPIOFactory
-from neopixel import *
+import neopixel
 
 class experiment:
     def __init__(self, partnum, trial_num):
@@ -25,7 +25,7 @@ class experiment:
             self.led_dict[num] = LED(self.pin_dict[num])
 
         #button connected to sever pi (should allow the lights to wait for button trigger on server pi)
-        self.button = Button(PiGPIOPIn(17, host = '192.168.1.3'))
+        self.button = Button(PiGPIOPIn(17, host = '192.168.4.2'))
 
         ##setup some constant variables##
         self.partnum = partnum
@@ -61,7 +61,7 @@ class experiment:
 
         ##setup our neopixels##
         self.pixels = neopixel.NeoPixel(self.pin_out, self.pin_num, brightness = self.brightness, auto_write = True)
-
+#        self.neo_remo = PWMLED(18)
     #registers an output given a list of pin numbers and either turns them off(0) or on(1)
     def LED_state(self, trig_pins, state):
         for pin in trig_pins:
@@ -89,8 +89,6 @@ class experiment:
 
         return new_pins
 
-
-
     def resp_trig(self, trig): # maps response trigger to standard (3) or target (4)
         if trig == 1:
             resp_trig = 3
@@ -100,7 +98,6 @@ class experiment:
         time.sleep(self.trig_gap)
         self.LED_state(pi2trig(255),0)
         time.sleep(self.trig_gap)
-
 
     def get_resp_led_off(led_on_time,trig): # get response (if occured in first 1 second) + turn off the LEDs regardless
         start_resp = time.time()
