@@ -43,6 +43,35 @@ df2.columns = ['pi_onset_latency'] # name the coloumns
 df2 = df2.apply(pd.to_numeric, args=('coerce',))  ## Convert to numeric
 df2['pi_onset_latency'] = df2['pi_onset_latency'] * 1000 # subtract all from start trigger
 
+# %% Pings # A different csv pi output - messy, will have to clean up - can write it nicer too - process at the end of the experiment script
+dfpi = np.gettext((r'M:\Data\GoPro_Grid\Pi_Times\\' + str(par) + '_test.csv'), sep=',', header=None) # pilot
+# all data will be in a - np.array(2,trial#) - take out the square bracket of the first and last elements
+#[b'3.600120544433594e-05',	b'3.0310654640197754',	b'6.0586419105529785]'
+dfpi[0,:] = np.around(dfpi[0,:],8) # round to 8 decimal places
+# extract all
+#b'1.890/2.057/2.225/0.173 ms\\n'	b'1.971/1.988/2.006/0.047 ms\\n'	b'2.083/2.095/2.107/0.012 ms\\n'
+# append 2 more empty rows, the number of given events
+trials = len(dfpi[0,:])
+dfpi np.append(dfpi,np.zeros((3,trials)), axis=0)
+for x in range(trials): # loop through each element in the ping stat row (row #2) and spit out into the 
+    temp = np.split(dfpi[1,:], '/')
+    for y in range(1,5):
+        dfpi[5-y,x] = temp[4-y]
+
+# Latency Distribution - Add lines with mean and median
+plt.figure(figsize=(15,10))
+plt.tight_layout()
+plt.title('Ping Latency Distribution - Par_00{}'.format(par))
+plt.ylabel('Number of Trials')
+plt.xlabel('Difference (ms)')
+sns.distplot(dfpi[1,:], rug = True, rug_kws={'color': 'black'})
+
+
+        
+#dfpi[3,x] = temp[2]
+#dfpi[2,x] = temp[1]
+#dfpi[1,x] = tmep[0]
+
 # %% 
 df2 = df2.reset_index()
 
